@@ -1,3 +1,5 @@
+//MIO
+
 //clases
 class gymClase {
     constructor(nombre, hora, capacidad, disponibilidad) {
@@ -34,7 +36,7 @@ const clase5 = new gymClase("Boxeo", "lunes a viernes 19:00", 20, false)
 
 // //array
 const clases = [clase1, clase2, clase3, clase4, clase5];
-
+const reservaClases = []
 
 //DOM
 const botonFiltrar = document.querySelector(".botonFiltrar")
@@ -43,6 +45,8 @@ const botonTodas = document.querySelector(".botonTodas")
 const todas = document.querySelector("#todas")
 const selectClase = document.querySelector("#selectClase")
 const listaClases = document.querySelector("#opciones")
+const tablaReserva = document.querySelector('#tablaReservas')
+const cuerpoReserva = document.querySelector('#cuerpo-reserva')
 
 //Funciones
 function filtrarClases() {
@@ -61,6 +65,7 @@ function filtrarClases() {
                             </tr>`
     })
 
+    inputFiltrar.value= " "
 }
 function mostrarTodas() {
     cuerpo.innerHTML = ""
@@ -74,32 +79,7 @@ function mostrarTodas() {
     })
 }
 mostrarTodas()
-function elegirClase() {
-    let clase = prompt("¿Qué clase quiere reservar?").toLowerCase()
-    switch (clase) {
-        case "functional":
-            alert("Esta clase está completa");
-            elegirClase();
-            break;
-        case "yoga":
-            alert("Esta clase está completa");
-            elegirClase();
-            break;
-        case "spinning":
-            alert("¡Listo! Gracias por reservar.")
-            break;
-        case "boxeo":
-            alert("¡Listo! Gracias por reservar.")
-            break;
-        case "pilates":
-            alert("¡Listo! Gracias por reservar.")
-            break;
-        default:
-            alert("Ingrese una clase válida")
-            elegirClase();
-            break
-    }
-}
+
 function seleccionarClase() {
     clases.forEach(clase => {
         selectClase.innerHTML += `<select>
@@ -116,11 +96,32 @@ botonTodas.addEventListener("click", mostrarTodas)
 //LS
 let form = document.querySelector('#reservar')
 form.addEventListener('submit', (e) => {
+    e.preventDefault()
     let inputNombre = document.getElementById('nombre').value
     let inputSocio = document.getElementById('socio').value
     let inputClase = document.getElementById('clase').value
     let usuario = new Usuario(inputNombre, inputSocio, inputClase)
-    localStorage.setItem('usuario', JSON.stringify(usuario))
-    alert("Gracias por reservar!")
+    reservaClases.push(usuario)
+    console.log(reservaClases);
+    localStorage.setItem('usuario', JSON.stringify(reservaClases))
 })
+
+function recuperarLS() {
+
+    let arrayLS = JSON.parse(localStorage.getItem('usuario'))
+    if (arrayLS) {
+        arrayLS.forEach(usuario=>{
+            debugger
+            reservaClases.push(usuario)
+            cuerpoReserva.innerHTML += `<tr>
+                                            <td>${usuario.nombre}</td>
+                                            <td>${usuario.clase}</td>
+                                            <td>${usuario.socio}</td>
+                                        </tr>`
+        })
+    }
+}
+const botonHistorial = document.querySelector(".botonHistorial")
+
+botonHistorial.addEventListener("click", recuperarLS)
 

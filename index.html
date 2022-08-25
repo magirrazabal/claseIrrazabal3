@@ -45,14 +45,14 @@
         </table>
       </article>
       <section>
-      <button class="boton botonFiltrar">Ver por día</button>
-      <button class="boton botonTodas">Ver todas</button>
-      <div id="filtrar">
-        <div class="form-group">
-          <input type="text" placeholder="¿Qué día querés entrenar?" name="filtrar" id="filtar" class="campos" />
+        <button class="boton botonFiltrar">Ver por día</button>
+        <button class="boton botonTodas">Ver todas</button>
+        <div id="filtrar">
+          <div class="form-group">
+            <input type="text" placeholder="¿Qué día querés entrenar?" name="filtrar" id="filtar" class="campos" />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </div>
     <div class="reserva">
       <h2>Reservá tu clase</h2>
@@ -65,14 +65,34 @@
         </div>
         <input type="text" placeholder="Clase" name="clase" id="clase" class="campos" />
         <button class="botonReservar">Reservar</button>
+        
+        <article class="tablaReservas" id="tablaReservas">
+          <h2>Historial de reservas de clases</h2>
+          <table class="table">
+            <thead class="table-bordered">
+              <tr>
+                <th>Nombre</th>
+                <th>Clase</th>
+                <th>Socio</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpo-reserva">
+    
+            </tbody>
+          </table>
+          <button class="boton botonHistorial">Cargar</button>
+        </article>
     </div>
 
     </form>
+
     </div>
+   
   </main>
   <footer class="pie d-flex justify-content-center">
     <p>Wellnes Gym®</p>
   </footer>
+
 </body>
 
 </html>
