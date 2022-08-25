@@ -111,7 +111,6 @@ function recuperarLS() {
     let arrayLS = JSON.parse(localStorage.getItem('usuario'))
     if (arrayLS) {
         arrayLS.forEach(usuario=>{
-            debugger
             reservaClases.push(usuario)
             cuerpoReserva.innerHTML += `<tr>
                                             <td>${usuario.nombre}</td>
